@@ -8,10 +8,6 @@ function App() {
     .then((r) => r.json())
     .then((data) => console.log(data));
   },[])
-  console.log('x')
-  // useEffect(() => {
-  //   console.log('x')
-  // }, [])
   return (
     <div className="App">
       <header className="App-header">
