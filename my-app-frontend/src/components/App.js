@@ -6,11 +6,6 @@ import RestaurantPage from './RestaurantPage'
 import FriendsPage from './FriendsPage'
 
 function App() {
-  const y  = useEffect (() => {
-    fetch("http://localhost:9292/")
-    .then((r) => r.json())
-    .then((data) => console.log(data));
-  },[])
 
   return (
     <>
