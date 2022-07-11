@@ -4,7 +4,7 @@ function RestaurantPage ()  {
     // const [restaurantList, setRestaurantList] = useState([])
 
     // useEffect(() => {
-    //     fetch("http://localhost:9292/restaurants?include_first_review")
+    //     fetch("http://localhost:9292/restaurants?include_review")
     //     .then(r => r.json)
     //     .then(d => setRestaurantList(d))
         
