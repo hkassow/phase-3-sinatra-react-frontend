@@ -1,17 +1,18 @@
+import React from "react";
 import styled from "styled-components";
 
-function ReviewsPage() {
+function HomePage() {
   return (
-    <StyledReviewsPage>
-      <Heading>Reviews</Heading>
-    </StyledReviewsPage>
+    <StyledHomePage>
+      <Heading>Home Page</Heading>
+    </StyledHomePage>
   );
 }
 
-const StyledReviewsPage = styled.div`
+const StyledHomePage = styled.div`
   min-height: 100vh;
   width: 100vw;
-  background-color: #282c34;
+  background-color: white;
 
   display: flex;
   flex-direction: column;
@@ -33,4 +34,4 @@ const Heading = styled.h1`
   -ms-user-select: none;
 `;
 
-export default ReviewsPage;
+export default HomePage;

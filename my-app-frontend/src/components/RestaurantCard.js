@@ -1,3 +1,1 @@
-function RestaurantCard () {
-    
-}
+function RestaurantCard() {}
