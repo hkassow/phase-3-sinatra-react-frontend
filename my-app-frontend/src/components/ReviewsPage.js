@@ -1,6 +1,12 @@
+// import { useEffect } from "react";
 import styled from "styled-components";
 
 function ReviewsPage() {
+  //   useEffect(() => {
+  //     fetch("http://localhost:9292/reviews?filter_by=3")
+  //       .then((r) => r.json())
+  //       .then((d) => console.log(d));
+  //   }, []);
   return (
     <StyledReviewsPage>
       <Heading>Reviews</Heading>
