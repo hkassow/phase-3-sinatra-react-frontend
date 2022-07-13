@@ -3,6 +3,7 @@ import styled from "styled-components";
 import RestaurantCard from "./RestaurantCard";
 
 function RestaurantPage() {
+<<<<<<< HEAD
   const [restaurantList, setRestaurantList] = useState([]);
 
   useEffect(() => {
@@ -10,20 +11,29 @@ function RestaurantPage() {
       .then((r) => r.json())
       .then((data) => setRestaurantList(data));
   }, []);
+=======
+  const [restaurantList, setRestaurantList] = useState([])
+
+  // useEffect (() => {
+  //   fetch("http://localhost:9292/restaurants?include_review")
+  //   .then((r) => r.json())
+  //   .then((data) => setRestaurantList(data))
+  // },[])
+  // console.log(restaurantList)
+>>>>>>> 8cda9e2 (helper functions)
   // note the include review and filter by 3 endpoints to allow for params
   // fetch("http://localhost:9292/reviews?filter_by=3")
   // .then(r => r.json())
   // .then(d => console.log(d))
   // }, [])
 
-  // console.log(restaurantList)
-  // useEffect(() => {
-  //     fetch("http://localhost:9292/restaurants?include_review")
-  //     .then(r => r.json)
-  //     .then(d => setRestaurantList(d))
-  // },[])
+  console.log(restaurantList)
+  useEffect(() => {
+      fetch("http://localhost:9292/restaurants?include_review")
+      .then(r => r.json())
+      .then(d => setRestaurantList(d))
 
-  console.log(restaurantList);
+  },[])
   return (
     <StyledRestaurantPage>
       <Header>
