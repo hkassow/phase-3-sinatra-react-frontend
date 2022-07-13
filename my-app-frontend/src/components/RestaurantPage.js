@@ -12,7 +12,7 @@ function RestaurantPage() {
       .then((r) => r.json())
       .then((data) => setRestaurantList(data));
   }, []);
-  console.log(restaurantList)
+  // console.log(restaurantList)
   // console.log(restaurantList)
   // useEffect(() => {
   //     fetch("http://localhost:9292/restaurants?include_review")
