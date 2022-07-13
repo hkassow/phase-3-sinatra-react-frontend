@@ -89,8 +89,10 @@ const Center = styled.div`
 const Left = styled.div`
   text-align center;
   background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
 `
 const Heading = styled.div`
+  border-radius: 18px;
   grid-area: 1 / 1 /1 / span 3;
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
