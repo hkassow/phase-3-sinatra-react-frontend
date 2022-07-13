@@ -32,4 +32,5 @@ const Title = styled.h3`
 const Reviews = styled.p`
   color: #fff;
   font-weight: 300;
+  font-size: 20px;
 `;
