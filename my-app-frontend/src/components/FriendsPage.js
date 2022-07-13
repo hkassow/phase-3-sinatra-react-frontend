@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import RestaurantCard from "./RestaurantCard";
+import { useHistory } from "react-router-dom";
 
 function FriendsPage({currentUser}) {
   const [following, setFollowing] = useState([])
-  const [restaurantsReviews,setRestaurantsReviewed] =useState([])
+  const [restaurantsReviews,setRestaurantsReviews] =useState([])
+  const history = useHistory();
+  function handleReviewClick(e) {
+    history.push("/reviews", e);
+  }
   useEffect(() => {
     if (currentUser != null) {
       const x = [];
@@ -11,19 +17,30 @@ function FriendsPage({currentUser}) {
         x.push(<Option value={`${follower['id']}`}>{follower['name']}</Option>)
       })
     setFollowing(x)
+    let e = {target: {value: 0}}
+    handleClick(e)
   }},[currentUser])
-  const setAll = () => {
-  
-  }
   const handleClick = (e) => {
-    const id = e.target.value
-    //grab all reviews by this follower
+    let id = e.target.value
+    let params = 'include_review'
+    if (id == 0) {
+      id = currentUser['id']
+      params += '&friend_reviewed'
+    }
+    console.log(currentUser['id'])
     console.log(id)
-    // fetch(`/${user['id']}`)
-    // .then(r => r.json())
-    // .then(d => setRestaurantsReviewed(d))
+    fetch(`http://localhost:9292/restaurants/user/${id}?${params}`)
+    .then(r => r.json())
+    .then(d => setRestaurantsReviews(d.map((restaurant) => (
+        <RestaurantCard
+          restaurant={restaurant}
+          onHandleReviewClick={handleReviewClick}
+        />
+      )
+    )))
 
   }
+  console.log(restaurantsReviews)
 
   return (
     <StyledFriendsPage>
@@ -35,13 +52,13 @@ function FriendsPage({currentUser}) {
           <h1>
           </h1>
           <label for="Select">Select a specific friend:</label>
-          <Select onChange={(e) => handleClick(e)}>
-            <option value='1'>Show all</option>
+          <Select onChange={handleClick}>
+            <option value='0'>Show all</option>
             {following}
           </Select>
 
         </Left>
-        <Center>Friend's restaurant's reviewed:</Center>
+        {restaurantsReviews}
     </StyledFriendsPage>
   );
 }
@@ -66,12 +83,10 @@ const StyledFriendsPage = styled.div`
 `;
 const Center = styled.div`
   text-align center;
-  grid-area: 2 / 2 / auto / span 2;
   grid-template-columns: repeat(2,1fr);
   background-color: rgba(255, 255, 255, 0.8);
 `
 const Left = styled.div`
-  grid-area: 2 / 1 / auto / span 1;
   text-align center;
   background-color: rgba(255, 255, 255, 0.8);
 `
