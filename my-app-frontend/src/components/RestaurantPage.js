@@ -34,6 +34,7 @@ function RestaurantPage() {
         {restaurantList.map((restaurant) => {
           return (
             <RestaurantCard
+              key={restaurant.id}
               restaurant={restaurant}
               onHandleReviewClick={handleReviewClick}
             />
