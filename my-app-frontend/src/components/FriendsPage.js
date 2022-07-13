@@ -22,22 +22,26 @@ function FriendsPage({currentUser}) {
     // fetch(`/${user['id']}`)
     // .then(r => r.json())
     // .then(d => setRestaurantsReviewed(d))
-    
+
   }
 
   return (
     <StyledFriendsPage>
-        <Heading>Friends
+        <Heading>Friends Page
+          <h1>Current user:{currentUser != null?currentUser['name']:'none selected'}</h1>
           
         </Heading>
         <Left>
-          <h1>Show all friend's reviews</h1>
+          <h1>
+          </h1>
+          <label for="Select">Select a specific friend:</label>
           <Select onChange={(e) => handleClick(e)}>
+            <option value='1'>Show all</option>
             {following}
           </Select>
 
         </Left>
-        <Center>Showing</Center>
+        <Center>Friend's restaurant's reviewed:</Center>
     </StyledFriendsPage>
   );
 }
@@ -53,7 +57,7 @@ const Option = styled.option`
 `
 const StyledFriendsPage = styled.div`
   min-height: 100vh;
-  grid-template-columns: max-content;
+  grid-template-columns: repeat(3, 1fr);
   background-color: #282c34;
   display: grid;
   grid-gap: 10px;
@@ -69,7 +73,6 @@ const Center = styled.div`
 const Left = styled.div`
   grid-area: 2 / 1 / auto / span 1;
   text-align center;
-  max-width: 200px;
   background-color: rgba(255, 255, 255, 0.8);
 `
 const Heading = styled.div`
