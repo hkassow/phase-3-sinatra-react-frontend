@@ -10,7 +10,7 @@ import UserToggle from "./Users/UserToggle";
 import Users from "./Users/Users";
 
 function App() {
-  const [selectedUser, setSelectedUser] = useState('none')
+  const [currentUser, setcurrentUser] = useState(null)
   const [navToggled, setNavToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
   const [usernameList, setUsernameList] = useState([])
@@ -21,11 +21,14 @@ function App() {
   }, [])
   const helpSetUser = (username) => {
     console.log(username)
-    fetch(`http://localhost:9292/users?name=${username}`)
+    fetch(`http://localhost:9292/users?name=${username}&followers&following`)
     .then(r => r.json())
-    .then(data => setSelectedUser(data))
+    .then(data => setcurrentUser(data))
   }
-  console.log(selectedUser)
+  useEffect(() => {
+    console.log(currentUser)
+  },[currentUser])
+
   const handleNavToggle = () => {
     setNavToggled(!navToggled);
   };
@@ -44,8 +47,8 @@ function App() {
         {navToggled ? <Menu handleNavToggle={handleNavToggle} /> : null}
         <Switch>
           <Route exact path="/" component={RestaurantPage} />
-          <Route exact path="/reviews" component={ReviewsPage} />
-          <Route exact path="/friends" component={FriendsPage} />
+          <Route exact path="/reviews" component={()=> <ReviewsPage currentUser={currentUser}/>} />
+          <Route exact path="/friends" component={()=> <FriendsPage currentUser={currentUser}/>}/>
         </Switch>
       </Router>
     </>

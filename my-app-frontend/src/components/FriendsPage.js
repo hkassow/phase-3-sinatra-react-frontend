@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function FriendsPage() {
+function FriendsPage({currentUser}) {
+  const [following, setFollowing] = useState([])
+  useEffect(() => {
+    if (currentUser != null) {
+      const x = [];
+      currentUser['following'].forEach(follower => {
+        x.push(<li>{follower['name']}</li>)
+      })
+    setFollowing(x)
+  }},[currentUser])
+  console.log(following)
   return (
     <StyledFriendsPage>
         <Heading>Friends</Heading>
@@ -9,8 +19,7 @@ function FriendsPage() {
           <h1>Show friend reviews</h1>
           <ul> 
             <h1>Show:</h1>
-            <li>friend1</li>
-            <li>friend2</li>
+            {following}
           </ul>
         </Left>
         <Center>Center</Center>
@@ -34,6 +43,7 @@ const Left = styled.div`
   grid-area: 2 / 1 / auto / span 1;
   text-align center;
   max-width: 200px;
+  background-color: rgba(255, 255, 255, 0.8);
 `
 const Heading = styled.div`
   grid-area: 1 / 1 /1 / span 3;
