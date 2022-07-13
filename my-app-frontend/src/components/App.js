@@ -6,23 +6,26 @@ import FriendsPage from "./FriendsPage";
 import styled, { createGlobalStyle } from "styled-components";
 import Toggle from "./Toggle";
 import Menu from "./Menu";
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: 'Poppins', sans-serif;
-  }
-`;
+import UserToggle from "./Users/UserToggle";
+import Users from "./Users/Users";
 
 function App() {
   const [navToggled, setNavToggled] = useState(false);
+  const [userToggled, setUserToggled] = useState(false);
 
   const handleNavToggle = () => {
     setNavToggled(!navToggled);
   };
 
+  const handleUserToggle = () => {
+    setUserToggled(!userToggled);
+  };
+
   return (
     <>
       <GlobalStyle />
+      <UserToggle handleUserToggle={handleUserToggle} />
+      {userToggled ? <Users handleUserToggle={handleUserToggle} /> : null}
       <Toggle handleNavToggle={handleNavToggle} />
       <Router>
         {navToggled ? <Menu handleNavToggle={handleNavToggle} /> : null}
@@ -37,3 +40,9 @@ function App() {
 }
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+`;

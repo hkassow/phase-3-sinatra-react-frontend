@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import RestaurantCard from "./RestaurantCard";
 
 function RestaurantPage() {
   const [restaurantList, setRestaurantList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetch("http://localhost:9292/restaurants?include_review")
@@ -11,20 +13,33 @@ function RestaurantPage() {
       .then((data) => setRestaurantList(data));
   }, []);
   console.log(restaurantList)
+  // console.log(restaurantList)
+  // useEffect(() => {
+  //     fetch("http://localhost:9292/restaurants?include_review")
+  //     .then(r => r.json)
+  //     .then(d => setRestaurantList(d))
+  // },[])
 
+  function handleReviewClick(e) {
+    history.push("/reviews", e);
+  }
   return (
     <StyledRestaurantPage>
-      <Header>
-        <h1>Hello</h1>
-      </Header>
       <CardContainer>
         {restaurantList.map((restaurant) => {
-          return <RestaurantCard restaurant={restaurant} />;
+          return (
+            <RestaurantCard
+              restaurant={restaurant}
+              onHandleReviewClick={handleReviewClick}
+            />
+          );
         })}
       </CardContainer>
     </StyledRestaurantPage>
   );
 }
+
+export default RestaurantPage;
 
 const StyledRestaurantPage = styled.div`
   min-height: 100vh;
@@ -46,12 +61,5 @@ const CardContainer = styled.div`
   background: #1f2229;
   overflow: scroll;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 50px 50px;
   grid-gap: 5px;
 `;
-
-const Header = styled.div`
-  margin-bottom: 500px;
-`;
-
-export default RestaurantPage;

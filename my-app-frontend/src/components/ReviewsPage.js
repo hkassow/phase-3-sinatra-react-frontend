@@ -1,8 +1,11 @@
 // import { useEffect } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 function ReviewsPage() {
+  const location = useLocation();
+  const e = location.state;
   //   useEffect(() => {
   //     fetch("http://localhost:9292/reviews?filter_by=3")
   //       .then((r) => r.json())
