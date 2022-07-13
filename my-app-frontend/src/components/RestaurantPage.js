@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import RestaurantCard from "./RestaurantCard";
 
 function RestaurantPage() {
-  // const [restaurantList, setRestaurantList] = useState([])
+  const [restaurantList, setRestaurantList] = useState([]);
 
-  // useEffect (() => {
-  // fetch("http://localhost:9292/restaurants?include_review")
-  // .then((r) => r.json())
-  // .then((data) => setRestaurantList(data))
+  useEffect(() => {
+    fetch("http://localhost:9292/restaurants?include_review")
+      .then((r) => r.json())
+      .then((data) => setRestaurantList(data));
+  }, []);
   // note the include review and filter by 3 endpoints to allow for params
   // fetch("http://localhost:9292/reviews?filter_by=3")
   // .then(r => r.json())
@@ -19,11 +21,19 @@ function RestaurantPage() {
   //     fetch("http://localhost:9292/restaurants?include_review")
   //     .then(r => r.json)
   //     .then(d => setRestaurantList(d))
-
   // },[])
+
+  console.log(restaurantList);
   return (
     <StyledRestaurantPage>
-      <Heading>Restaurant Page</Heading>
+      <Header>
+        <h1>Hello</h1>
+      </Header>
+      <CardContainer>
+        {restaurantList.map((restaurant) => {
+          return <RestaurantCard restaurant={restaurant} />;
+        })}
+      </CardContainer>
     </StyledRestaurantPage>
   );
 }
@@ -39,18 +49,21 @@ const StyledRestaurantPage = styled.div`
   align-items: center;
 `;
 
-const Heading = styled.h1`
-  font-size: clamp(3rem, 5vw, 7vw);
-  color: #eee;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
+const CardContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background: #1f2229;
+  overflow: scroll;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 50px 50px;
+  grid-gap: 5px;
+`;
 
-  user-select: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+const Header = styled.div`
+  margin-bottom: 500px;
 `;
 
 export default RestaurantPage;
