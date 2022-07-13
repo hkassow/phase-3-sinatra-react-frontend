@@ -26,7 +26,6 @@ export default RestaurantCard;
 
 const CardWrapper = styled.div`
   display: grid;
-  grid-template-columns: 300px;
   grid-template-rows: 210px 210px 80px;
   grid-template-areas: "image" "text" "stats";
   border-radius: 18px;
