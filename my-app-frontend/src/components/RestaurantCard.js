@@ -1,21 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-function RestaurantCard({ restaurant }) {
+function RestaurantCard({ restaurant, onHandleReviewClick }) {
+  function handleClick() {
+    onHandleReviewClick(restaurant);
+  }
   return (
     <CardWrapper>
       <CardImage background={restaurant.img} />
       <CardTextWrapper>
         <CardTextTitle>{restaurant.name}</CardTextTitle>
         <CardTextSubHead>{restaurant.category}</CardTextSubHead>
-        <CardTextBody>{restaurant.description}</CardTextBody>
+        <CardTextBody>{restaurant.reviews[0].comment}</CardTextBody>
       </CardTextWrapper>
       <CardStatWrapper>
         <CardStats>
-          <LinkText href="#">Review</LinkText>
+          <CardButton onClick={handleClick}>Reviews</CardButton>
         </CardStats>
         <CardStats>
-          <LinkText href="#">Likes</LinkText>
+          <CardButton>Rating: {restaurant.reviews[0].score}</CardButton>
         </CardStats>
       </CardStatWrapper>
     </CardWrapper>
@@ -26,7 +29,6 @@ export default RestaurantCard;
 
 const CardWrapper = styled.div`
   display: grid;
-  grid-template-columns: 300px;
   grid-template-rows: 210px 210px 80px;
   grid-template-areas: "image" "text" "stats";
   border-radius: 18px;
@@ -93,7 +95,11 @@ const CardTextSubHead = styled.span`
   font-size: 13px;
 `;
 
-const LinkText = styled.a`
-  color: #fff
-  text-decoration:none;
+const CardButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
 `;
