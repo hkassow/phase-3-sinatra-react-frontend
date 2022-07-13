@@ -20,7 +20,6 @@ function App() {
     .then(data => setUsernameList(data.map(user => user.name)))
   }, [])
   const helpSetUser = (username) => {
-    console.log(username)
     fetch(`http://localhost:9292/users?name=${username}&followers&following`)
     .then(r => r.json())
     .then(data => setcurrentUser(data))
@@ -36,7 +35,6 @@ function App() {
   const handleUserToggle = () => {
     setUserToggled(!userToggled);
   };
-
   return (
     <>
       <GlobalStyle />
