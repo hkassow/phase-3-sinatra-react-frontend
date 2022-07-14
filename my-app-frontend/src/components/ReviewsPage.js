@@ -1,34 +1,44 @@
 // import { useEffect } from "react";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeConsumer } from "styled-components";
 import { useLocation } from "react-router-dom";
 import ReviewCard from "./ReviewsCard/ReviewCard";
 
-function ReviewsPage() {
+function ReviewsPage({currentUser}) {
   const location = useLocation();
   const restaurant = location.state;
   const [newObj, setNewObj] = useState({
     comment: "",
+    restaurant_id: restaurant['id'],
+    user_id: null
   });
-
+  useEffect(() => {
+    if (currentUser != null){
+      setNewObj({ ...newObj, ['user_id']: currentUser['id'] })
+    }
+  },[currentUser])
+  console.log(newObj)
   function handleChange(e) {
     setNewObj({ ...newObj, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(newObj)
     fetch("http://localhost:9292/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newObj),
-    });
+    })
+    .then(r => r.json())
+    .then(d => console.log(d))
   }
-
+//<ReviewCard restaurant={restaurant} />
   return (
     <StyledReviewsPage>
-      <ReviewCard restaurant={restaurant} />
+      {(restaurant != null)?<ReviewCard restaurant={restaurant} /> : null}
       <CreateReview>
         <ReviewButton>Leave a Review</ReviewButton>
         <ReviewForm onSubmit={handleSubmit}>
