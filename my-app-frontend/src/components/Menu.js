@@ -7,7 +7,7 @@ function Menu({ handleNavToggle }) {
   return (
     <StyledMenu>
       <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="/reviews">Reviews</StyledLink>
+      {/* <StyledLink to="/reviews">Reviews</StyledLink> */}
       <StyledLink to="/friends">Friends</StyledLink>
       <CloseToggle onClick={handleNavToggle} />
     </StyledMenu>
