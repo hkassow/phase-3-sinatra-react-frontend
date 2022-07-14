@@ -5,6 +5,7 @@ function ReviewCard({ restaurant }) {
   return (
     <div style={{ color: "#000" }}>
       <RestaurantName>{restaurant.name}</RestaurantName>
+      <RestaurantDesc>{restaurant.description}</RestaurantDesc>
       <Title>Reviews</Title>
       {restaurant.reviews.map((review) => {
         return (
@@ -33,4 +34,10 @@ const Reviews = styled.p`
   color: #fff;
   font-weight: 300;
   font-size: 20px;
+`;
+
+const RestaurantDesc = styled.p`
+  color: #fff;
+  font-weight: 900;
+  font-size: 25px;
 `;
