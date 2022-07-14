@@ -80,7 +80,7 @@ const DeleteButton = styled.button`
   position: sticky;
   top: 50%;
   background-color: #0a0a23;
-  color: #fff;
+  color: red;
   border: none;
   border-radius: 10px;
   padding: 15px;
