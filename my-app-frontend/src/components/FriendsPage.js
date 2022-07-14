@@ -28,7 +28,7 @@ function FriendsPage({currentUser, usernameList, setCurrentUser}) {
       id = currentUser['id']
       params += '&friend_reviewed'
     }
-    fetch(`http://localhost:9292/restaurants/user/${id}?${params}`)
+    fetch(`https://intelligent-gerard-03838.herokuapp.com/restaurants/user/${id}?${params}`)
     .then(r => r.json())
     .then(d => setRestaurantsReviews(d.map((restaurant) => (
         <RestaurantCard

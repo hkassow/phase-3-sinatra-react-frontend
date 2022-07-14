@@ -22,7 +22,7 @@ function RestaurantPage() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:9292/restaurants?include_review")
+    fetch("https://intelligent-gerard-03838.herokuapp.com/restaurants?include_review")
       .then((r) => r.json())
       .then((data) => setRestaurantList(data));
   }, []);

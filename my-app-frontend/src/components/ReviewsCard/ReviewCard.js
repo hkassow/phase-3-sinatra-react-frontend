@@ -6,7 +6,7 @@ function ReviewCard({ restaurant }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9292/users")
+    fetch("https://intelligent-gerard-03838.herokuapp.com/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
@@ -24,7 +24,7 @@ function ReviewCard({ restaurant }) {
 
   function onHandleClick(review, e) {
     const reviewId = review.id;
-    fetch(`http://localhost:9292/reviews/${reviewId}`, {
+    fetch(`https://intelligent-gerard-03838.herokuapp.com/reviews/${reviewId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });

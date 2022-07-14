@@ -14,13 +14,14 @@ function App() {
   const [navToggled, setNavToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
   const [usernameList, setUsernameList] = useState([]);
+  
   useEffect(() => {
-    fetch("http://localhost:9292/users")
+    fetch("https://intelligent-gerard-03838.herokuapp.com/users")
       .then((r) => r.json())
       .then((data) => setUsernameList(data.map((user) => user.name)));
   }, []);
   const helpSetUser = (username) => {
-    fetch(`http://localhost:9292/users?name=${username}&followers&following`)
+    fetch(`https://intelligent-gerard-03838.herokuapp.com/users?name=${username}&followers&following`)
       .then((r) => r.json())
       .then((data) => setCurrentUser(data));
   };

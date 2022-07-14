@@ -6,12 +6,11 @@ function AddFriend({currentUser, usernameList, setCurrentUser}) {
         setShowList(!showListToggle)
     }
     const optionsClick = async (e) => {
-        //POST http://localhost:9292/friends?follower_id=2&followee_id=5
        
         let followee;
-        await fetch(`http://localhost:9292/users?name=${e.target.textContent}`)
-        .then(r => r.json())
-        .then(data => followee = data)
+        await fetch(`https://intelligent-gerard-03838.herokuapp.com/users?name=${e.target.textContent}`)
+                .then(r => r.json())
+                .then(data => followee = data)
         fetch(`http://localhost:9292/friends`, {
             method: "POST",
             headers: {
@@ -36,7 +35,6 @@ function AddFriend({currentUser, usernameList, setCurrentUser}) {
         if (currentUser != null) {
             following = currentUser['following'].map(user => user['name'])
         }
-        console.log(following)
         usernameList.forEach(username => {
             if (!(following.includes(username))){
                 listNames.push(<Options onClick={optionsClick}>{username}</Options>)

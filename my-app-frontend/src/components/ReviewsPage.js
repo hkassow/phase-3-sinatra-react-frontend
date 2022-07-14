@@ -20,7 +20,7 @@ function ReviewsPage({currentUser}) {
   useEffect(() => {
     if (currentUser != null){
       setNewObj({ ...newObj, ['user_id']: currentUser['id'] })
-      fetch(`http://localhost:9292/restaurants/user/${currentUser['id']}?include_review`)
+      fetch(`https://intelligent-gerard-03838.herokuapp.com/restaurants/user/${currentUser['id']}?include_review`)
       .then(r => r.json())
       .then(d => d.forEach(element => {
         if (element['id'] === restaurant['id']) {
@@ -40,7 +40,7 @@ function ReviewsPage({currentUser}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:9292/reviews", {
+    fetch("https://intelligent-gerard-03838.herokuapp.com//reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function ReviewsPage({currentUser}) {
   }
   function handleUpdateSubmit(e) {
     e.preventDefault();
-    fetch(`http://localhost:9292/reviews/${currentUserReview.id}`, {
+    fetch(`https://intelligent-gerard-03838.herokuapp.com//reviews/${currentUserReview.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function ReviewsPage({currentUser}) {
     handleClick2()
   }
   function handleDelete() {
-    fetch(`http://localhost:9292/reviews/${currentUserReview.id}`,{
+    fetch(`https://intelligent-gerard-03838.herokuapp.com//reviews/${currentUserReview.id}`,{
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
