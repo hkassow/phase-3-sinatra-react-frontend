@@ -104,7 +104,7 @@ const CardContainer = styled.div`
 
 const Heading = styled.h1`
   font-size: 45px;
-  text-align: left;
+  text-align: center;
   color: white;
 `;
 
@@ -158,4 +158,5 @@ const SearchDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 25px;
 `;

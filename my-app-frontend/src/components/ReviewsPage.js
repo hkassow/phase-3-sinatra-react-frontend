@@ -13,6 +13,8 @@ function ReviewsPage({currentUser}) {
     restaurant_id: restaurant['id'],
     user_id: null
   });
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     if (currentUser != null){
       setNewObj({ ...newObj, ['user_id']: currentUser['id'] })
@@ -40,27 +42,35 @@ function ReviewsPage({currentUser}) {
     .then(r => r.json())
     .then(d => console.log(d))
   }
+
+
+  function handleClick() {
+    setShowForm(!showForm);
+  }
+
 //<ReviewCard restaurant={restaurant} />
   return (
     <StyledReviewsPage>
       {(restaurant != null)?<ReviewCard restaurant={restaurant} /> : null}
       <CreateReview>
-        <ReviewButton>Leave a Review</ReviewButton>
-        <ReviewForm onSubmit={handleSubmit}>
-          <ReviewText
-            type="text"
-            placeholder="Leave a Review"
-            onChange={handleChange}
-            name="comment"
-          />
-          <ReviewText 
-            type="text"
-            placeholder="Rating"
-            onChange={handleChange}
-            name="score"
-          />
-          <ReviewButton type="submit">Submit</ReviewButton>
-        </ReviewForm>
+        <ReviewButton onClick={handleClick}>Leave a Review</ReviewButton>
+        {showForm ? (
+          <ReviewForm onSubmit={handleSubmit}>
+            <ReviewText
+              type="text"
+              placeholder="Leave a Review"
+              onChange={handleChange}
+              name="comment"
+            />
+            <ReviewText 
+              type="text"
+              placeholder="Rating"
+              onChange={handleChange}
+              name="score"
+            />
+            <ReviewButton type="submit">Submit</ReviewButton>
+          </ReviewForm>
+        ) : null}
       </CreateReview>
     </StyledReviewsPage>
   );
@@ -81,14 +91,13 @@ const StyledReviewsPage = styled.div`
 
 const ReviewButton = styled.button`
   position: sticky;
-  top: 50%;
   background-color: #0a0a23;
   color: #fff;
   border: none;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   min-height: 30px;
-  min-width: 120px;
+  min-width: 100px;
   font-size: 20px;
 `;
 
