@@ -18,7 +18,12 @@ function RestaurantCard({ restaurant, onHandleReviewClick }) {
           <CardButton onClick={handleClick}>Reviews</CardButton>
         </CardStats>
         <CardStats>
-          <CardButton>Rating: {restaurant.reviews[0].score}</CardButton>
+          <CardButton>
+            Rating:{" "}
+            {restaurant.reviews.length === 0
+              ? "no rating"
+              : restaurant.reviews[0].score}
+          </CardButton>
         </CardStats>
       </CardStatWrapper>
     </CardWrapper>
