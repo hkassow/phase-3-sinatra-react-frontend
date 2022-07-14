@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import RestaurantCard from "./RestaurantCard";
 import { useHistory } from "react-router-dom";
+import AddFriend from "./AddFriend";
 
-function FriendsPage({currentUser}) {
+function FriendsPage({currentUser, usernameList, setCurrentUser}) {
   const [following, setFollowing] = useState([])
   const [restaurantsReviews,setRestaurantsReviews] =useState([])
   const history = useHistory();
@@ -27,20 +28,18 @@ function FriendsPage({currentUser}) {
       id = currentUser['id']
       params += '&friend_reviewed'
     }
-    console.log(currentUser['id'])
-    console.log(id)
     fetch(`http://localhost:9292/restaurants/user/${id}?${params}`)
     .then(r => r.json())
     .then(d => setRestaurantsReviews(d.map((restaurant) => (
         <RestaurantCard
           restaurant={restaurant}
           onHandleReviewClick={handleReviewClick}
+          addReview ={(id===currentUser['id'])?false:true}
         />
       )
     )))
 
   }
-  console.log(restaurantsReviews)
 
   return (
     <StyledFriendsPage>
@@ -56,6 +55,7 @@ function FriendsPage({currentUser}) {
             <option value='0'>Show all</option>
             {following}
           </Select>
+          <AddFriend currentUser={currentUser} usernameList={usernameList} setCurrentUser = {setCurrentUser}/>
 
         </Left>
         {restaurantsReviews}

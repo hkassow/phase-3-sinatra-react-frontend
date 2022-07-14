@@ -14,7 +14,6 @@ function RestaurantPage() {
   const displayRestaurants = restaurantList.filter((restaurant) => {
     return restaurant.category.toLowerCase().includes(input.toLowerCase());
   });
-
   const onFormSubmit = (e) => {
     e.preventDefault();
     setInput("");

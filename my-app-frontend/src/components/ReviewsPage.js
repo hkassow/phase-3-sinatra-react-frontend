@@ -1,39 +1,57 @@
 // import { useEffect } from "react";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeConsumer } from "styled-components";
 import { useLocation } from "react-router-dom";
 import ReviewCard from "./ReviewsCard/ReviewCard";
 
-function ReviewsPage() {
+function ReviewsPage({currentUser}) {
   const location = useLocation();
   const restaurant = location.state;
   const [newObj, setNewObj] = useState({
     comment: "",
+    score: null,
+    restaurant_id: restaurant['id'],
+    user_id: null
   });
   const [showForm, setShowForm] = useState(false);
 
+  useEffect(() => {
+    if (currentUser != null){
+      setNewObj({ ...newObj, ['user_id']: currentUser['id'] })
+    }
+  },[currentUser])
   function handleChange(e) {
+    if (e.target.name === 'score'){
+      if (5 < e.target.value) {e.target.value=5}
+      if(e.target.value < 0) {e.target.value =0}
+    }
     setNewObj({ ...newObj, [e.target.name]: e.target.value });
   }
+  console.log(newObj)
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(newObj)
     fetch("http://localhost:9292/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newObj),
-    });
+    })
+    .then(r => r.json())
+    .then(d => console.log(d))
   }
+
 
   function handleClick() {
     setShowForm(!showForm);
   }
 
+//<ReviewCard restaurant={restaurant} />
   return (
     <StyledReviewsPage>
-      <ReviewCard restaurant={restaurant} />
+      {(restaurant != null)?<ReviewCard restaurant={restaurant} /> : null}
       <CreateReview>
         <ReviewButton onClick={handleClick}>Leave a Review</ReviewButton>
         {showForm ? (
@@ -43,6 +61,12 @@ function ReviewsPage() {
               placeholder="Leave a Review"
               onChange={handleChange}
               name="comment"
+            />
+            <ReviewText 
+              type="text"
+              placeholder="Rating"
+              onChange={handleChange}
+              name="score"
             />
             <ReviewButton type="submit">Submit</ReviewButton>
           </ReviewForm>

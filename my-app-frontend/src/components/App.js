@@ -24,9 +24,7 @@ function App() {
       .then((r) => r.json())
       .then((data) => setcurrentUser(data));
   };
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  }
 
   const handleNavToggle = () => {
     setNavToggled(!navToggled);
@@ -60,7 +58,7 @@ function App() {
           <Route
             exact
             path="/friends"
-            component={() => <FriendsPage currentUser={currentUser} />}
+            component={() => <FriendsPage currentUser={currentUser} setCurrentUser={setCurrentUser} usernameList={usernameList} />}
           />
         </Switch>
       </Router>
