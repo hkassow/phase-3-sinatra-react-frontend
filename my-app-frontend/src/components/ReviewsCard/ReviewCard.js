@@ -43,7 +43,8 @@ function ReviewCard({ restaurant }) {
             {userFilter(review.user_id)}{" "}
             <DeleteButton onClick={(e) => onHandleClick(review, e)}>
               X
-            </DeleteButton>
+            </DeleteButton>{" "}
+            <EditButton>Edit</EditButton>
           </Reviews>
         );
       })}
@@ -81,4 +82,13 @@ const DeleteButton = styled.button`
   font-size: 17px;
   border-radius: 18px;
   font-weight: 1000;
+`;
+
+const EditButton = styled.button`
+  background: transparent;
+  color: green;
+  font-size: 17px;
+  border-radius: 18px;
+  font-weight: 300;
+  font-family: "Poppins", sans-serif;
 `;
