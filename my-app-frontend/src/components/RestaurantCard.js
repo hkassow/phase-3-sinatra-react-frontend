@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-function RestaurantCard({ restaurant, onHandleReviewClick }) {
+function RestaurantCard({ restaurant, onHandleReviewClick, addReview = false }) {
   function handleClick() {
     onHandleReviewClick(restaurant);
   }
+  console.log(restaurant.reviews[0])
+  console.log(addReview)
   return (
     <CardWrapper>
       <CardImage background={restaurant.img} />
       <CardTextWrapper>
         <CardTextTitle>{restaurant.name}</CardTextTitle>
         <CardTextSubHead>{restaurant.category}</CardTextSubHead>
-        <CardTextBody>{restaurant.description}</CardTextBody>
+        <CardTextBody>{((addReview === false)? restaurant.description: restaurant.reviews[0].comment)}</CardTextBody>
       </CardTextWrapper>
       <CardStatWrapper>
         <CardStats>

@@ -43,7 +43,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={RestaurantPage} />
           <Route exact path="/reviews" component={()=> <ReviewsPage currentUser={currentUser}/>} />
-          <Route exact path="/friends" component={()=> <FriendsPage currentUser={currentUser} usernameList={usernameList}/>}/>
+          <Route exact path="/friends" component={()=> <FriendsPage currentUser={currentUser} setCurrentUser={setCurrentUser} usernameList={usernameList}/>}/>
         </Switch>
       </Router>
     </>

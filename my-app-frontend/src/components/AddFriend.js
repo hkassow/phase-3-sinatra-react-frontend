@@ -1,30 +1,35 @@
 import { useState } from "react";
 import styled from "styled-components";
-function AddFriend({currentUser, usernameList}) {
+function AddFriend({currentUser, usernameList, setCurrentUser}) {
     const [showListToggle, setShowList] = useState(false)
     const handleClick = () => {
         setShowList(!showListToggle)
     }
-    let userToFollow
-    const optionsClick = (e) => {
-        //remove from list
-        //add to followers list on current user
-        //make post request for new friend instance
-        // console.log(listNames)
-        // e.target.remove()
-        // console.log(e.target.textContent)
-        // console.log(currentUser['name'])
-        // let userToFollow
-        // fetch(`http://localhost:9292/users?name=${e.target.textContent}`)
-        // .then(r => r.json())
-        // .then(data => currentUser['following'].push(data))
-        // console.log(currentUser['following'])
+    const optionsClick = async (e) => {
+        //POST http://localhost:9292/friends?follower_id=2&followee_id=5
+       
+        let followee;
+        await fetch(`http://localhost:9292/users?name=${e.target.textContent}`)
+        .then(r => r.json())
+        .then(data => followee = data)
+        fetch(`http://localhost:9292/friends`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+             },
+            body: JSON.stringify({
+                follower_id: currentUser['id'],
+                followee_id: followee['id']
+            })
+        })
+        .then( r => r.json())
+        .then(data => console.log(data))
+        let followingList = [...currentUser['following'], followee]
+        console.log(followingList)
+        setCurrentUser({...currentUser, ['following']: followingList})
+        e.target.remove()
+
     }
-
-        
-        // console.log(e.target.textContent)
-        // console.log(currentUser['name'])
-
     let listNames = []
     if (typeof usernameList != 'undefined') {
         let following = []

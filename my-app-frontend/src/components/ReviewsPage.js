@@ -9,6 +9,7 @@ function ReviewsPage({currentUser}) {
   const restaurant = location.state;
   const [newObj, setNewObj] = useState({
     comment: "",
+    score: null,
     restaurant_id: restaurant['id'],
     user_id: null
   });
@@ -18,8 +19,13 @@ function ReviewsPage({currentUser}) {
     }
   },[currentUser])
   function handleChange(e) {
+    if (e.target.name === 'score'){
+      if (5 < e.target.value) {e.target.value=5}
+      if(e.target.value < 0) {e.target.value =0}
+    }
     setNewObj({ ...newObj, [e.target.name]: e.target.value });
   }
+  console.log(newObj)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -46,6 +52,12 @@ function ReviewsPage({currentUser}) {
             placeholder="Leave a Review"
             onChange={handleChange}
             name="comment"
+          />
+          <ReviewText 
+            type="text"
+            placeholder="Rating"
+            onChange={handleChange}
+            name="score"
           />
           <ReviewButton type="submit">Submit</ReviewButton>
         </ReviewForm>
