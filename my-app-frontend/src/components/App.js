@@ -10,7 +10,7 @@ import UserToggle from "./Users/UserToggle";
 import Users from "./Users/Users";
 
 function App() {
-  const [currentUser, setcurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null)
   const [navToggled, setNavToggled] = useState(false);
   const [userToggled, setUserToggled] = useState(false);
   const [usernameList, setUsernameList] = useState([])
@@ -22,7 +22,7 @@ function App() {
   const helpSetUser = (username) => {
     fetch(`http://localhost:9292/users?name=${username}&followers&following`)
     .then(r => r.json())
-    .then(data => setcurrentUser(data))
+    .then(data => setCurrentUser(data))
   }
 
   const handleNavToggle = () => {
@@ -43,7 +43,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={RestaurantPage} />
           <Route exact path="/reviews" component={()=> <ReviewsPage currentUser={currentUser}/>} />
-          <Route exact path="/friends" component={()=> <FriendsPage currentUser={currentUser}/>}/>
+          <Route exact path="/friends" component={()=> <FriendsPage currentUser={currentUser} usernameList={usernameList}/>}/>
         </Switch>
       </Router>
     </>

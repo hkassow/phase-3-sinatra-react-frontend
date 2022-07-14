@@ -17,7 +17,6 @@ function ReviewsPage({currentUser}) {
       setNewObj({ ...newObj, ['user_id']: currentUser['id'] })
     }
   },[currentUser])
-  console.log(newObj)
   function handleChange(e) {
     setNewObj({ ...newObj, [e.target.name]: e.target.value });
   }

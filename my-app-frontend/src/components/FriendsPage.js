@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import RestaurantCard from "./RestaurantCard";
 import { useHistory } from "react-router-dom";
+import AddFriend from "./AddFriend";
 
-function FriendsPage({currentUser}) {
+function FriendsPage({currentUser, usernameList}) {
   const [following, setFollowing] = useState([])
   const [restaurantsReviews,setRestaurantsReviews] =useState([])
   const history = useHistory();
@@ -56,6 +57,7 @@ function FriendsPage({currentUser}) {
             <option value='0'>Show all</option>
             {following}
           </Select>
+          <AddFriend currentUser={currentUser} usernameList={usernameList} />
 
         </Left>
         {restaurantsReviews}

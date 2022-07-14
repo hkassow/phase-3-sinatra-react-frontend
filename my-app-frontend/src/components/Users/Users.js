@@ -12,7 +12,8 @@ function Users({ handleUserToggle, currentUser, usernameList, helpSetUser }) {
   useEffect(() => {
     if (currentUser != null) {
       let element = document.getElementById('leaveCode');
-      element.value = currentUser['name'];  
+      element.value = currentUser['name'];
+    
     }
   },[])
   return (
