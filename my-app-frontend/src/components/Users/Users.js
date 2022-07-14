@@ -10,10 +10,11 @@ function Users({ handleUserToggle, currentUser, usernameList, helpSetUser }) {
     ))
   }
   useEffect(() => {
-    let element = document.getElementById('leaveCode');
-    element.value = currentUser['name'];
-    
-  })
+    if (currentUser != null) {
+      let element = document.getElementById('leaveCode');
+      element.value = currentUser['name'];  
+    }
+  },[])
   return (
     <StyledMenu>
       <h1>Select user:</h1>
