@@ -1,30 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import styled from "styled-components";
 
-function Users({ handleUserToggle }) {
+function Users({ handleUserToggle, currentUser, usernameList, helpSetUser }) {
+  let listNames = []
+  if (typeof usernameList != 'undefined') {
+    listNames = usernameList.map(username => (
+      <option style={{cursor: 'pointer'}} >{username}</option>
+    ))
+  }
+  useEffect(() => {
+    if (currentUser != null) {
+      let element = document.getElementById('leaveCode');
+      element.value = currentUser['name'];  
+    }
+  },[])
   return (
     <StyledMenu>
-      <h1>Hello</h1>
+      <h1>Select user:</h1>
+      <select id='leaveCode' onChange={(e) => helpSetUser(e.target.value)}>
+        {listNames}
+      </select>
+
       <CloseToggle onClick={handleUserToggle} />
     </StyledMenu>
   );
 }
 
 export default Users;
+const Userlist = styled.div`
+overflow-y:scroll;
+overflow: hidden;
+
+`
 
 const StyledMenu = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
   width: 100%;
+  height: 100%;
   @media screen and (min-width: 790px) {
     width: 60%;
   }
   background-color: rgba(255, 255, 255, 0.95);
   z-index: 99;
-
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
