@@ -11,7 +11,7 @@ function RestaurantCard({ restaurant, onHandleReviewClick }) {
       <CardTextWrapper>
         <CardTextTitle>{restaurant.name}</CardTextTitle>
         <CardTextSubHead>{restaurant.category}</CardTextSubHead>
-        <CardTextBody>{restaurant.reviews[0].comment}</CardTextBody>
+        <CardTextBody>{restaurant.description}</CardTextBody>
       </CardTextWrapper>
       <CardStatWrapper>
         <CardStats>
