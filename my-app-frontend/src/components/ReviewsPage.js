@@ -10,6 +10,7 @@ function ReviewsPage() {
   const [newObj, setNewObj] = useState({
     comment: "",
   });
+  const [showForm, setShowForm] = useState(false);
 
   function handleChange(e) {
     setNewObj({ ...newObj, [e.target.name]: e.target.value });
@@ -26,20 +27,26 @@ function ReviewsPage() {
     });
   }
 
+  function handleClick() {
+    setShowForm(!showForm);
+  }
+
   return (
     <StyledReviewsPage>
       <ReviewCard restaurant={restaurant} />
       <CreateReview>
-        <ReviewButton>Leave a Review</ReviewButton>
-        <ReviewForm onSubmit={handleSubmit}>
-          <ReviewText
-            type="text"
-            placeholder="Leave a Review"
-            onChange={handleChange}
-            name="comment"
-          />
-          <ReviewButton type="submit">Submit</ReviewButton>
-        </ReviewForm>
+        <ReviewButton onClick={handleClick}>Leave a Review</ReviewButton>
+        {showForm ? (
+          <ReviewForm onSubmit={handleSubmit}>
+            <ReviewText
+              type="text"
+              placeholder="Leave a Review"
+              onChange={handleChange}
+              name="comment"
+            />
+            <ReviewButton type="submit">Submit</ReviewButton>
+          </ReviewForm>
+        ) : null}
       </CreateReview>
     </StyledReviewsPage>
   );
@@ -60,14 +67,13 @@ const StyledReviewsPage = styled.div`
 
 const ReviewButton = styled.button`
   position: sticky;
-  top: 50%;
   background-color: #0a0a23;
   color: #fff;
   border: none;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   min-height: 30px;
-  min-width: 120px;
+  min-width: 100px;
   font-size: 20px;
 `;
 
