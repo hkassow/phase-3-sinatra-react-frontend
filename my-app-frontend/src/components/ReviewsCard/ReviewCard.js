@@ -22,12 +22,13 @@ function ReviewCard({ restaurant }) {
     }
   }
 
-  function onHandleClick(review) {
+  function onHandleClick(review, e) {
     const reviewId = review.id;
     fetch(`http://localhost:9292/reviews/${reviewId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+    e.target.parentNode.remove();
   }
 
   return (
@@ -40,7 +41,7 @@ function ReviewCard({ restaurant }) {
           <Reviews key={review.id}>
             -{review.comment} Rating: {review.score} -
             {userFilter(review.user_id)}{" "}
-            <DeleteButton onClick={(e) => onHandleClick(review)}>
+            <DeleteButton onClick={(e) => onHandleClick(review, e)}>
               X
             </DeleteButton>
           </Reviews>
