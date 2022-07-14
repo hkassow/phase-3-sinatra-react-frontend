@@ -13,7 +13,6 @@ function RestaurantPage() {
       .then((data) => setRestaurantList(data));
   }, []);
   // console.log(restaurantList)
-  // console.log(restaurantList)
   // useEffect(() => {
   //     fetch("http://localhost:9292/restaurants?include_review")
   //     .then(r => r.json)
@@ -29,6 +28,7 @@ function RestaurantPage() {
         {restaurantList.map((restaurant) => {
           return (
             <RestaurantCard
+              key={restaurant.id}
               restaurant={restaurant}
               onHandleReviewClick={handleReviewClick}
             />

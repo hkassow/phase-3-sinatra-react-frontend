@@ -1,22 +1,51 @@
 // import { useEffect } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import ReviewCard from "./ReviewsCard/ReviewCard";
 
 function ReviewsPage() {
   const location = useLocation();
-  const e = location.state;
-  //   useEffect(() => {
-  //     fetch("http://localhost:9292/reviews?filter_by=3")
-  //       .then((r) => r.json())
-  //       .then((d) => console.log(d));
-  //   }, []);
+  const restaurant = location.state;
+  const [newObj, setNewObj] = useState({
+    comment: "",
+  });
+
+  function handleChange(e) {
+    setNewObj({ ...newObj, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch("http://localhost:9292/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newObj),
+    });
+  }
+
   return (
     <StyledReviewsPage>
-      <Heading>Reviews</Heading>
+      <ReviewCard restaurant={restaurant} />
+      <CreateReview>
+        <ReviewButton>Leave a Review</ReviewButton>
+        <ReviewForm onSubmit={handleSubmit}>
+          <ReviewText
+            type="text"
+            placeholder="Leave a Review"
+            onChange={handleChange}
+            name="comment"
+          />
+          <ReviewButton type="submit">Submit</ReviewButton>
+        </ReviewForm>
+      </CreateReview>
     </StyledReviewsPage>
   );
 }
+
+export default ReviewsPage;
 
 const StyledReviewsPage = styled.div`
   min-height: 100vh;
@@ -29,18 +58,43 @@ const StyledReviewsPage = styled.div`
   align-items: center;
 `;
 
-const Heading = styled.h1`
-  font-size: clamp(3rem, 5vw, 7vw);
-  color: #eee;
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+const ReviewButton = styled.button`
+  position: sticky;
+  top: 50%;
+  background-color: #0a0a23;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 30px;
+  min-width: 120px;
+  font-size: 20px;
 `;
 
-export default ReviewsPage;
+const ReviewText = styled.textarea`
+  box-sizing: border-box;
+  margin: 20px;
+  background-color: #fafafa;
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  resize: vertical;
+  padding: 15px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+`;
+
+const CreateReview = styled.div`
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const ReviewForm = styled.form`
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+`;
