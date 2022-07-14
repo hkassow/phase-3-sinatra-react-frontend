@@ -77,18 +77,27 @@ const RestaurantDesc = styled.p`
 `;
 
 const DeleteButton = styled.button`
-  background: transparent;
-  color: red;
-  font-size: 17px;
-  border-radius: 18px;
-  font-weight: 1000;
+  position: sticky;
+  top: 50%;
+  background-color: #0a0a23;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 30px;
+  min-width: 120px;
+  font-size: 20px;
 `;
 
 const EditButton = styled.button`
-  background: transparent;
-  color: green;
-  font-size: 17px;
-  border-radius: 18px;
-  font-weight: 300;
-  font-family: "Poppins", sans-serif;
+  position: sticky;
+  top: 50%;
+  background-color: #0a0a23;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 30px;
+  min-width: 120px;
+  font-size: 20px;
 `;
