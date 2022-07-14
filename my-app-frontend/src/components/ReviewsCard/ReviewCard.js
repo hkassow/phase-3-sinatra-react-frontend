@@ -41,10 +41,10 @@ function ReviewCard({ restaurant }) {
           <Reviews key={review.id}>
             -{review.comment} Rating: {review.score} -
             {userFilter(review.user_id)}{" "}
-            <DeleteButton onClick={(e) => onHandleClick(review, e)}>
+            {/* <DeleteButton onClick={(e) => onHandleClick(review, e)}>
               X
             </DeleteButton>{" "}
-            <EditButton>Edit</EditButton>
+            <EditButton>Edit</EditButton> */}
           </Reviews>
         );
       })}

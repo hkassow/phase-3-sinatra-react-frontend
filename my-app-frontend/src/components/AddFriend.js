@@ -101,7 +101,7 @@ const SearchInput = styled.input`
 `
 const Dropdown = styled.div`
     position: relative;
-    display: inline-block;
+    display: block;
     padding: 10px;
 `
   
