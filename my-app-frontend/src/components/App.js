@@ -39,7 +39,7 @@ function App() {
     <>
       <GlobalStyle />
       <UserToggle handleUserToggle={handleUserToggle} />
-      {userToggled ? <Users handleUserToggle={handleUserToggle} helpSetUser={helpSetUser} usernameList ={usernameList}/> : null}
+      {userToggled ? <Users handleUserToggle={handleUserToggle} helpSetUser={helpSetUser} currentUser={currentUser} usernameList ={usernameList}/> : null}
       <Toggle handleNavToggle={handleNavToggle} />
       <Router>
         {navToggled ? <Menu handleNavToggle={handleNavToggle} /> : null}

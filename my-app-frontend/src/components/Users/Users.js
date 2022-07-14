@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import styled from "styled-components";
 
-function Users({ handleUserToggle, usernameList, helpSetUser }) {
+function Users({ handleUserToggle, currentUser, usernameList, helpSetUser }) {
   let listNames = []
   if (typeof usernameList != 'undefined') {
     listNames = usernameList.map(username => (
       <option style={{cursor: 'pointer'}} >{username}</option>
     ))
   }
+  useEffect(() => {
+    let element = document.getElementById('leaveCode');
+    element.value = currentUser['name'];
+    
+  })
   return (
     <StyledMenu>
       <h1>Select user:</h1>
-      <select onChange={(e) => helpSetUser(e.target.value)}>
+      <select id='leaveCode' onChange={(e) => helpSetUser(e.target.value)}>
         {listNames}
       </select>
 

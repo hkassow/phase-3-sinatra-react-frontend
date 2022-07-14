@@ -45,7 +45,7 @@ function FriendsPage({currentUser}) {
   return (
     <StyledFriendsPage>
         <Heading>Friends Page
-          <h1>Current user:{currentUser != null?currentUser['name']:'none selected'}</h1>
+          <h1>Current user: {currentUser != null?currentUser['name']:'none selected'}</h1>
           
         </Heading>
         <Left>
@@ -90,6 +90,7 @@ const Left = styled.div`
   text-align center;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 18px;
+  height: 500px;
 `
 const Heading = styled.div`
   border-radius: 18px;
