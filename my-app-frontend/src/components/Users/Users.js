@@ -6,7 +6,7 @@ function Users({ handleUserToggle, currentUser, usernameList, helpSetUser }) {
   let listNames = []
   if (typeof usernameList != 'undefined') {
     listNames = usernameList.map(username => (
-      <option style={{cursor: 'pointer'}} >{username}</option>
+      <option key={username} style={{cursor: 'pointer'}} >{username}</option>
     ))
   }
   useEffect(() => {

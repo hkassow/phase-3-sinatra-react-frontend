@@ -5,8 +5,6 @@ function RestaurantCard({ restaurant, onHandleReviewClick, addReview = false }) 
   function handleClick() {
     onHandleReviewClick(restaurant);
   }
-  console.log(restaurant.reviews[0])
-  console.log(addReview)
   return (
     <CardWrapper>
       <CardImage background={restaurant.img} />

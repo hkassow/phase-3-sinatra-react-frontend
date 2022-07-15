@@ -16,7 +16,6 @@ function ReviewsPage({currentUser}) {
     user_id: null
   });
   const [showForm, setShowForm] = useState(false);
-  console.log(restaurant)
   useEffect(() => {
     if (currentUser != null){
       setNewObj({ ...newObj, ['user_id']: currentUser['id'] })

@@ -11,7 +11,7 @@ function AddFriend({currentUser, usernameList, setCurrentUser}) {
         await fetch(`https://intelligent-gerard-03838.herokuapp.com/users?name=${e.target.textContent}`)
                 .then(r => r.json())
                 .then(data => followee = data)
-        fetch(`http://localhost:9292/friends`, {
+        fetch(`https://intelligent-gerard-03838.herokuapp.com/friends`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function AddFriend({currentUser, usernameList, setCurrentUser}) {
         }
         usernameList.forEach(username => {
             if (!(following.includes(username))){
-                listNames.push(<Options onClick={optionsClick}>{username}</Options>)
+                listNames.push(<Options key={username} onClick={optionsClick}>{username}</Options>)
             }
         })
     }
@@ -60,9 +60,9 @@ function AddFriend({currentUser, usernameList, setCurrentUser}) {
     }
 
     return (
-    <Dropdown class="dropdown">
+    <Dropdown className="dropdown">
         <Dropbtn onClick={handleClick} >Add a friend</Dropbtn>
-        <OptionsContainer visibility={showListToggle} id="myDropdown" class="dropdown-content">
+        <OptionsContainer visibility={showListToggle? 'block': 'none'} id="myDropdown" className="dropdown-content">
             <input type="text" placeholder="Search.." id="myInput" onKeyUp={filterFunction}/>
             {listNames}
         </OptionsContainer>
@@ -116,7 +116,7 @@ const Options = styled.option`
 
 `
 const OptionsContainer = styled.div`
-    display: ${props => props.visibility? 'block': 'none'};
+    display: ${props => props.visibility};
     background-color: #f6f6f6;
     height: 300px;
     overflow: auto;

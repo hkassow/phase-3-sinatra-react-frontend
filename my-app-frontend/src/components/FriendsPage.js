@@ -15,7 +15,7 @@ function FriendsPage({currentUser, usernameList, setCurrentUser}) {
     if (currentUser != null) {
       const x = [];
       currentUser['following'].forEach(follower => {
-        x.push(<Option value={`${follower['id']}`}>{follower['name']}</Option>)
+        x.push(<Option key={follower['name']} value={`${follower['id']}`}>{follower['name']}</Option>)
       })
     setFollowing(x)
     let e = {target: {value: 0}}
@@ -32,6 +32,7 @@ function FriendsPage({currentUser, usernameList, setCurrentUser}) {
     .then(r => r.json())
     .then(d => setRestaurantsReviews(d.map((restaurant) => (
         <RestaurantCard
+          key ={restaurant['name']}
           restaurant={restaurant}
           onHandleReviewClick={handleReviewClick}
           addReview ={(id===currentUser['id'])?false:true}
@@ -50,7 +51,7 @@ function FriendsPage({currentUser, usernameList, setCurrentUser}) {
         <Left>
           <h1>
           </h1>
-          <label for="Select">Select a specific friend:</label>
+          <label >Select a specific friend:</label>
           <Select onChange={handleClick}>
             <option value='0'>Show all</option>
             {following}
