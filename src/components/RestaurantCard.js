@@ -20,9 +20,7 @@ function RestaurantCard({ restaurant, onHandleReviewClick, addReview = false }) 
         <CardStats>
           <CardButton>
             Rating:{" "}
-            {restaurant.reviews.length === 0
-              ? "no rating"
-              : restaurant.reviews[0].score}
+            {restaurant['average_score']}
           </CardButton>
         </CardStats>
       </CardStatWrapper>
